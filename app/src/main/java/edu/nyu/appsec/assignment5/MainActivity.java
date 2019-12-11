@@ -8,19 +8,19 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
-import android.net.http.SslError;
+
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.webkit.SslErrorHandler;
+
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import java.io.BufferedInputStream;
+
 import java.io.IOException;
-import java.io.SerializablePermission;
+
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -91,8 +91,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
         WebSettings settings = view.getSettings();
         settings.setAllowFileAccessFromFileURLs(false);
-        settings.setJavaScriptEnabled(false);
+        settings.setJavaScriptEnabled(true); //needed for the menu
         settings.setAllowUniversalAccessFromFileURLs(false);
+        settings.setAllowContentAccess(false);
+        settings.setAllowFileAccess(false);
 
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (!(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED

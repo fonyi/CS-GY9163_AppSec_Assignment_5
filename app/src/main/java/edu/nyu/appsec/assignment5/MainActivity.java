@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     */
     @Override
     public void onLocationChanged(Location location) {
-        URL url = null;
+        URL url;
         try {
             url = new URL(SPELL_CHECK_URL + "metrics"
                     +"?lat="
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             return;
         }
 
-        HttpURLConnection urlConnection = null;
+        HttpURLConnection urlConnection;
         try {
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.disconnect();
@@ -90,9 +90,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         view.setWebViewClient(new MyWebViewClient());
 
         WebSettings settings = view.getSettings();
-        settings.setAllowFileAccessFromFileURLs(true);
-        settings.setJavaScriptEnabled(true);
-        settings.setAllowUniversalAccessFromFileURLs(true);
+        settings.setAllowFileAccessFromFileURLs(false);
+        settings.setJavaScriptEnabled(false);
+        settings.setAllowUniversalAccessFromFileURLs(false);
 
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (!(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED

